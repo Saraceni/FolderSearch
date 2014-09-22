@@ -1,0 +1,54 @@
+APP CODE DOCUMENTATION
+
+-------------------------------------- Main Activity -------------------------------------------
+
+Responsible for managing the UI, action bar and the interaction between the fragments. 
+
+-------------------------------------- List Fragment -----------------------------------------
+
+ListFragment is the fragment responsible for the navigation between the files of the device.
+
+------------------------------------ SearchResultFragment ---------------------------------------
+
+Fragment responsible to manage the results of a search.
+
+-------------------------------------- SearchFragment -------------------------------------------
+
+Fragment responsible to receive the file name to be searched and start the service to process
+the search in the background.
+
+--------------------------------------- SearchThread -------------------------------------------
+
+Thread responsible to perform the search of a determined file. It's constructor receives a Handler 
+and a String objects, the first containing the handler responsible for the communication between
+the thread and the calling context and the second containing the file name to be searched.
+
+--------------------------------------- Broadcast Events ----------------------------------------
+
+Broadcast Intents are used to notify applications of system or application events, extending the 
+event-driven programming model between applications.
+
+-------------------------------------- FolderSearchService ---------------------------------------
+
+Service responsible to call SearchThread and manage the search results
+
+
+
+
+FUTURE VERSION TO INCLUDE SERVICE
+
+------------------Communication Between ListFragment and FolderSearchService------------------------
+
+ListFragment holds an Messenger serviceMessengerSender returned by FolderSearchService to send 
+messages to the service. This variable is set in the ServiceConnection class method 
+onServiceConnected(ComponentName className, IBinder service). When the ListFragment receives the
+FolderSearchService messenger, it creates a message containing his Handler for the SearchThread to
+send the result of the search.
+
+----------------------------- Fragment and Service Interaction -----------------------------------
+
+The Service don't start immediately after binding. He can be created during binding but will only
+start if a Context.startService(Intent intent) call is made with an Intent containing the service
+parameters is called.
+
+If the activity is destroyed the service started by it is destroyed too.

@@ -1,0 +1,2 @@
+Maintain all fragments and activity state. Performs search and navigation between folders. Menu and action bar working correctly.
+
